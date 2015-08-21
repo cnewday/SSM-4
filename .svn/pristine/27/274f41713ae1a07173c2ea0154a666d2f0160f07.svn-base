@@ -1,0 +1,23 @@
+package com.youxuan.eu.model;
+
+public class StartupinfoWithBLOBs extends Startupinfo {
+    private String tdconcept;
+
+    private String proinfo;
+
+    public String getTdconcept() {
+        return tdconcept;
+    }
+
+    public void setTdconcept(String tdconcept) {
+        this.tdconcept = tdconcept == null ? null : tdconcept.trim();
+    }
+
+    public String getProinfo() {
+        return proinfo;
+    }
+
+    public void setProinfo(String proinfo) {
+        this.proinfo = proinfo == null ? null : proinfo.trim();
+    }
+}

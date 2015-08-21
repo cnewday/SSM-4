@@ -1,0 +1,19 @@
+package com.youxuan.eu.mapper;
+
+import com.youxuan.eu.model.Webconfig;
+
+public interface WebconfigMapper {
+    int deleteByPrimaryKey(Integer webconfigId);
+
+    int insert(Webconfig record);
+
+    int insertSelective(Webconfig record);
+
+    Webconfig selectByPrimaryKey(Integer webconfigId);
+
+    int updateByPrimaryKeySelective(Webconfig record);
+
+    int updateByPrimaryKeyWithBLOBs(Webconfig record);
+
+    int updateByPrimaryKey(Webconfig record);
+}

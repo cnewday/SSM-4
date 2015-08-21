@@ -1,0 +1,20 @@
+package com.youxuan.eu.mapper;
+
+import com.youxuan.eu.model.Startupinfo;
+import com.youxuan.eu.model.StartupinfoWithBLOBs;
+
+public interface StartupinfoMapper {
+    int deleteByPrimaryKey(Integer startupinfoId);
+
+    int insert(StartupinfoWithBLOBs record);
+
+    int insertSelective(StartupinfoWithBLOBs record);
+
+    StartupinfoWithBLOBs selectByPrimaryKey(Integer startupinfoId);
+
+    int updateByPrimaryKeySelective(StartupinfoWithBLOBs record);
+
+    int updateByPrimaryKeyWithBLOBs(StartupinfoWithBLOBs record);
+
+    int updateByPrimaryKey(Startupinfo record);
+}

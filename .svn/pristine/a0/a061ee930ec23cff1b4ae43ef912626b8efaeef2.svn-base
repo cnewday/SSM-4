@@ -1,0 +1,14 @@
+package com.youxuan.eu.test;
+/**
+ * @name 专门测试用的地方
+ */
+import org.junit.Test;
+
+
+
+public class EuTest {
+	@Test
+	public void test(){
+		
+	}
+}

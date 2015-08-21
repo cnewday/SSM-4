@@ -1,0 +1,11 @@
+package com.youxuan.eu.service;
+
+import com.youxuan.eu.model.Training_type;
+/**
+ * 培训类型服务接口
+ * @author 邹龙
+ *
+ */
+public interface Training_typeService extends BaseService_Base<Training_type>{
+
+}

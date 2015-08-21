@@ -1,0 +1,68 @@
+package com.youxuan.eu.test;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.youxuan.eu.model.Training;
+import com.youxuan.eu.model.User;
+import com.youxuan.eu.model.Usergroup;
+import com.youxuan.eu.model.Webconfig;
+import com.youxuan.eu.service.TrainingService;
+import com.youxuan.eu.service.UserService;
+import com.youxuan.eu.service.UsergroupService;
+import com.youxuan.eu.service.WebconfigService;
+
+
+
+public class EuTest {
+	ApplicationContext applicationContext=new ClassPathXmlApplicationContext(new String[]{"classpath:conf/spring-mybatis.xml","classpath:conf/spring-mvc.xml","classpath:conf/spring.xml"});
+	
+	
+//	@Test
+//	public void test1(){
+//		UserService userService=(UserService) applicationContext.getBean("userImpl");
+//	    User user=new User();
+//	    user.setUserName("����");
+//	    user.setPassword("123");
+//	    userService.addUser(user);
+//	}
+	
+//	@Test
+//	public void test2(){
+//		WebconfigService webconfigService=(WebconfigService) applicationContext.getBean("webconfigimpl");
+//	   Webconfig webconfig=new Webconfig();
+//	   webconfig.setVarname("zoulong");
+//	   webconfig.setVarvalue("233");
+//	 System.out.println("插入列的id："+  webconfigService.add(webconfig));
+//	}
+	
+//	@Test
+//	public void test3(){
+//		UsergroupService usergroupService=(UsergroupService) applicationContext.getBean("usergroupImpl");
+//	  Usergroup usergroup=new Usergroup();
+//	  usergroup.setColor("#000");
+//	  usergroup.setUsergroupName("团体用户");
+//	 System.out.println("插入列的id："+  usergroupService.add(usergroup));
+//	}
+	
+	@Test
+	public void test4(){
+		TrainingService trainingService=(TrainingService) applicationContext.getBean("trainingServiceImpl");
+          Training training=new Training();
+          training.setAreaId(1);
+          training.setCityId(1);
+          training.setContact("45645345");
+          training.setCreateTime(2345456);
+          training.setPrice("5000");
+          training.setProvinceId(1);
+          training.setTelphone("3463546235");
+          training.setTitile("android培训");
+          training.setTrainingTypeId(1);
+          training.setContent("提高android水平");
+          training.setUserId(1);
+	 System.out.println("插入列的id："+  trainingService.add(training));
+	}
+	
+}

@@ -1,0 +1,25 @@
+package com.youxuan.eu.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.youxuan.eu.mapper.UserMapper;
+import com.youxuan.eu.model.User;
+import com.youxuan.eu.service.UserService;
+
+@Service
+public class UserImpl implements UserService {
+
+	@Autowired
+	public UserMapper userMapper;
+
+	public int addUser(User user) {
+		userMapper.insert(user);
+		return user.getUserId();
+	}
+
+	public User selectUser(User user) {
+		return userMapper.selectallcol(user);
+	}
+
+}

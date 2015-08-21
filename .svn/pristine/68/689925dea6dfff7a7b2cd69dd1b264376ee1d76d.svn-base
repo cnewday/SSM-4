@@ -1,0 +1,8 @@
+package com.youxuan.eu.service;
+
+import com.youxuan.eu.model.User;
+
+public interface UserService {
+public void addUser(User user);
+public User selectUser(User user);
+}

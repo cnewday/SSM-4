@@ -1,0 +1,74 @@
+package com.youxuan.eu.controller;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.imageio.spi.RegisterableService;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.youxuan.eu.model.User;
+import com.youxuan.eu.service.UserService;
+
+@Controller
+@RequestMapping("/usercontroller")
+public class UserController {
+	@Autowired
+	public UserService userService;
+
+	@RequestMapping("adduser")
+	public void addUser(User user) {
+		userService.addUser(user);
+	}
+/**
+ * 做登陆
+ * @param 输入账号可以是电话和邮箱或者用户名
+ * @param 密码
+ * @param 响应
+ * @return
+ */
+	@RequestMapping("login")
+	public String login(String data,String password,HttpServletResponse response)
+	{
+		Cookie cookie = null;
+		User GetDate=getuser(data);
+		
+		if (GetDate.getPassword().equals(password))
+			cookie = new Cookie("Islogin", "true");
+		 else 
+			cookie = new Cookie("Islogin", "true");
+		response.addCookie(cookie);
+		return "view/jsp/regist/regist";
+	}
+	/**
+	 * 通过传入的有唯一标示符的数据库列，获取用户信息
+	 * @param 请求的数据，比如是电话号码
+	 * @return 返回一个User
+	 */
+	public User getuser(String data) {
+		User selectUser=new User();
+		System.out.println(data.indexOf("@"));
+		if(data.indexOf("@")>0)
+			selectUser.setEmail(data);
+		else if(isMobileNO(data))
+			selectUser.setMobile(data);
+		else 
+			selectUser.setUserName(data);
+		return userService.selectUser(selectUser);
+	}
+	/**
+	 * 可以判断是否为电话号码
+	 * @param 传入字符串
+	 * @return
+	 */
+	public boolean isMobileNO(String mobiles) {
+		Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
+		Matcher m = p.matcher(mobiles);
+		return m.matches();
+		}
+}
