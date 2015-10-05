@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.model.Company" >
+    <id column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="company_location" property="companyLocation" jdbcType="VARCHAR" />
+    <result column="company_telephone" property="companyTelephone" jdbcType="CHAR" />
+    <result column="company_code" property="companyCode" jdbcType="INTEGER" />
+    <result column="company_comp_count" property="companyCompCount" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.model.CompanyWithBLOBs" extends="BaseResultMap" >
+    <result column="evaluation_peple" property="evaluationPeple" jdbcType="LONGVARCHAR" />
+    <result column="company_picture" property="companyPicture" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    company_id, company_name, company_location, company_telephone, company_code, company_comp_count
+  </sql>
+  <sql id="Blob_Column_List" >
+    evaluation_peple, company_picture
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from company
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from company
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.model.CompanyWithBLOBs" >
+    insert into company (company_id, company_name, company_location, 
+      company_telephone, company_code, company_comp_count, 
+      evaluation_peple, company_picture
+      )
+    values (#{companyId,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{companyLocation,jdbcType=VARCHAR}, 
+      #{companyTelephone,jdbcType=CHAR}, #{companyCode,jdbcType=INTEGER}, #{companyCompCount,jdbcType=INTEGER}, 
+      #{evaluationPeple,jdbcType=LONGVARCHAR}, #{companyPicture,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.CompanyWithBLOBs" >
+    insert into company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="companyLocation != null" >
+        company_location,
+      </if>
+      <if test="companyTelephone != null" >
+        company_telephone,
+      </if>
+      <if test="companyCode != null" >
+        company_code,
+      </if>
+      <if test="companyCompCount != null" >
+        company_comp_count,
+      </if>
+      <if test="evaluationPeple != null" >
+        evaluation_peple,
+      </if>
+      <if test="companyPicture != null" >
+        company_picture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLocation != null" >
+        #{companyLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTelephone != null" >
+        #{companyTelephone,jdbcType=CHAR},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=INTEGER},
+      </if>
+      <if test="companyCompCount != null" >
+        #{companyCompCount,jdbcType=INTEGER},
+      </if>
+      <if test="evaluationPeple != null" >
+        #{evaluationPeple,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="companyPicture != null" >
+        #{companyPicture,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.CompanyWithBLOBs" >
+    update company
+    <set >
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLocation != null" >
+        company_location = #{companyLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTelephone != null" >
+        company_telephone = #{companyTelephone,jdbcType=CHAR},
+      </if>
+      <if test="companyCode != null" >
+        company_code = #{companyCode,jdbcType=INTEGER},
+      </if>
+      <if test="companyCompCount != null" >
+        company_comp_count = #{companyCompCount,jdbcType=INTEGER},
+      </if>
+      <if test="evaluationPeple != null" >
+        evaluation_peple = #{evaluationPeple,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="companyPicture != null" >
+        company_picture = #{companyPicture,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.model.CompanyWithBLOBs" >
+    update company
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      company_location = #{companyLocation,jdbcType=VARCHAR},
+      company_telephone = #{companyTelephone,jdbcType=CHAR},
+      company_code = #{companyCode,jdbcType=INTEGER},
+      company_comp_count = #{companyCompCount,jdbcType=INTEGER},
+      evaluation_peple = #{evaluationPeple,jdbcType=LONGVARCHAR},
+      company_picture = #{companyPicture,jdbcType=LONGVARCHAR}
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.Company" >
+    update company
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      company_location = #{companyLocation,jdbcType=VARCHAR},
+      company_telephone = #{companyTelephone,jdbcType=CHAR},
+      company_code = #{companyCode,jdbcType=INTEGER},
+      company_comp_count = #{companyCompCount,jdbcType=INTEGER}
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+</mapper>

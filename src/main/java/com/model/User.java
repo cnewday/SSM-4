@@ -1,33 +1,113 @@
 package com.model;
 
 public class User {
-    private Integer userId;
+    private Long userId;
 
-    private Integer usergroupId;
+    private Integer userLevelId;
 
-    private String userName;
+    private Integer authorityId;
 
-    public Integer getUserId() {
+    private String userPhonenumber;
+
+    private String userPassworld;
+
+    private String userEmail;
+
+    private Integer userSex;
+
+    private String userRegistTime;
+
+    private String userLogoTime;
+
+    private Integer userCount;
+
+    private String userLogo;
+
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public Integer getUsergroupId() {
-        return usergroupId;
+    public Integer getUserLevelId() {
+        return userLevelId;
     }
 
-    public void setUsergroupId(Integer usergroupId) {
-        this.usergroupId = usergroupId;
+    public void setUserLevelId(Integer userLevelId) {
+        this.userLevelId = userLevelId;
     }
 
-    public String getUserName() {
-        return userName;
+    public Integer getAuthorityId() {
+        return authorityId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setAuthorityId(Integer authorityId) {
+        this.authorityId = authorityId;
+    }
+
+    public String getUserPhonenumber() {
+        return userPhonenumber;
+    }
+
+    public void setUserPhonenumber(String userPhonenumber) {
+        this.userPhonenumber = userPhonenumber == null ? null : userPhonenumber.trim();
+    }
+
+    public String getUserPassworld() {
+        return userPassworld;
+    }
+
+    public void setUserPassworld(String userPassworld) {
+        this.userPassworld = userPassworld == null ? null : userPassworld.trim();
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail == null ? null : userEmail.trim();
+    }
+
+    public Integer getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(Integer userSex) {
+        this.userSex = userSex;
+    }
+
+    public String getUserRegistTime() {
+        return userRegistTime;
+    }
+
+    public void setUserRegistTime(String userRegistTime) {
+        this.userRegistTime = userRegistTime == null ? null : userRegistTime.trim();
+    }
+
+    public String getUserLogoTime() {
+        return userLogoTime;
+    }
+
+    public void setUserLogoTime(String userLogoTime) {
+        this.userLogoTime = userLogoTime == null ? null : userLogoTime.trim();
+    }
+
+    public Integer getUserCount() {
+        return userCount;
+    }
+
+    public void setUserCount(Integer userCount) {
+        this.userCount = userCount;
+    }
+
+    public String getUserLogo() {
+        return userLogo;
+    }
+
+    public void setUserLogo(String userLogo) {
+        this.userLogo = userLogo == null ? null : userLogo.trim();
     }
 }

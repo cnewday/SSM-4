@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.PublicityMapper" >
+  <resultMap id="BaseResultMap" type="com.model.Publicity" >
+    <id column="publicity_id" property="publicityId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.model.Publicity" extends="BaseResultMap" >
+    <result column="publicity_company_id" property="publicityCompanyId" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    publicity_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    publicity_company_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from publicity
+    where publicity_id = #{publicityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from publicity
+    where publicity_id = #{publicityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.model.Publicity" >
+    insert into publicity (publicity_id, publicity_company_id
+      )
+    values (#{publicityId,jdbcType=INTEGER}, #{publicityCompanyId,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.Publicity" >
+    insert into publicity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="publicityId != null" >
+        publicity_id,
+      </if>
+      <if test="publicityCompanyId != null" >
+        publicity_company_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="publicityId != null" >
+        #{publicityId,jdbcType=INTEGER},
+      </if>
+      <if test="publicityCompanyId != null" >
+        #{publicityCompanyId,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Publicity" >
+    update publicity
+    <set >
+      <if test="publicityCompanyId != null" >
+        publicity_company_id = #{publicityCompanyId,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where publicity_id = #{publicityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.model.Publicity" >
+    update publicity
+    set publicity_company_id = #{publicityCompanyId,jdbcType=LONGVARCHAR}
+    where publicity_id = #{publicityId,jdbcType=INTEGER}
+  </update>
+</mapper>

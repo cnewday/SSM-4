@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.User_levelMapper" >
+  <resultMap id="BaseResultMap" type="com.model.User_level" >
+    <id column="user_level_id" property="userLevelId" jdbcType="INTEGER" />
+    <result column="user_level_name" property="userLevelName" jdbcType="CHAR" />
+    <result column="user_level_count" property="userLevelCount" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_level_id, user_level_name, user_level_count
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_level
+    where user_level_id = #{userLevelId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_level
+    where user_level_id = #{userLevelId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.model.User_level" >
+    insert into user_level (user_level_id, user_level_name, user_level_count
+      )
+    values (#{userLevelId,jdbcType=INTEGER}, #{userLevelName,jdbcType=CHAR}, #{userLevelCount,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.User_level" >
+    insert into user_level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userLevelId != null" >
+        user_level_id,
+      </if>
+      <if test="userLevelName != null" >
+        user_level_name,
+      </if>
+      <if test="userLevelCount != null" >
+        user_level_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userLevelId != null" >
+        #{userLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="userLevelName != null" >
+        #{userLevelName,jdbcType=CHAR},
+      </if>
+      <if test="userLevelCount != null" >
+        #{userLevelCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.User_level" >
+    update user_level
+    <set >
+      <if test="userLevelName != null" >
+        user_level_name = #{userLevelName,jdbcType=CHAR},
+      </if>
+      <if test="userLevelCount != null" >
+        user_level_count = #{userLevelCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_level_id = #{userLevelId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.User_level" >
+    update user_level
+    set user_level_name = #{userLevelName,jdbcType=CHAR},
+      user_level_count = #{userLevelCount,jdbcType=INTEGER}
+    where user_level_id = #{userLevelId,jdbcType=INTEGER}
+  </update>
+</mapper>

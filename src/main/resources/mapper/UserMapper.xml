@@ -2,28 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mapper.UserMapper" >
   <resultMap id="BaseResultMap" type="com.model.User" >
-    <id column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="usergroup_id" property="usergroupId" jdbcType="INTEGER" />
-    <result column="user_name" property="userName" jdbcType="CHAR" />
+    <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_level_id" property="userLevelId" jdbcType="INTEGER" />
+    <result column="authority_id" property="authorityId" jdbcType="INTEGER" />
+    <result column="user_phoneNumber" property="userPhonenumber" jdbcType="CHAR" />
+    <result column="user_passworld" property="userPassworld" jdbcType="CHAR" />
+    <result column="user_email" property="userEmail" jdbcType="CHAR" />
+    <result column="user_sex" property="userSex" jdbcType="INTEGER" />
+    <result column="user_regist_time" property="userRegistTime" jdbcType="CHAR" />
+    <result column="user_logo_time" property="userLogoTime" jdbcType="CHAR" />
+    <result column="user_count" property="userCount" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.model.User" extends="BaseResultMap" >
+    <result column="user_logo" property="userLogo" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, usergroup_id, user_name
+    user_id, user_level_id, authority_id, user_phoneNumber, user_passworld, user_email, 
+    user_sex, user_regist_time, user_logo_time, user_count
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <sql id="Blob_Column_List" >
+    user_logo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from user
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from user
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.model.User" >
-    insert into user (user_id, usergroup_id, user_name
-      )
-    values (#{userId,jdbcType=INTEGER}, #{usergroupId,jdbcType=INTEGER}, #{userName,jdbcType=CHAR}
-      )
+    insert into user (user_id, user_level_id, authority_id, 
+      user_phoneNumber, user_passworld, user_email, 
+      user_sex, user_regist_time, user_logo_time, 
+      user_count, user_logo)
+    values (#{userId,jdbcType=BIGINT}, #{userLevelId,jdbcType=INTEGER}, #{authorityId,jdbcType=INTEGER}, 
+      #{userPhonenumber,jdbcType=CHAR}, #{userPassworld,jdbcType=CHAR}, #{userEmail,jdbcType=CHAR}, 
+      #{userSex,jdbcType=INTEGER}, #{userRegistTime,jdbcType=CHAR}, #{userLogoTime,jdbcType=CHAR}, 
+      #{userCount,jdbcType=INTEGER}, #{userLogo,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.model.User" >
     insert into user
@@ -31,41 +51,134 @@
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="usergroupId != null" >
-        usergroup_id,
+      <if test="userLevelId != null" >
+        user_level_id,
       </if>
-      <if test="userName != null" >
-        user_name,
+      <if test="authorityId != null" >
+        authority_id,
+      </if>
+      <if test="userPhonenumber != null" >
+        user_phoneNumber,
+      </if>
+      <if test="userPassworld != null" >
+        user_passworld,
+      </if>
+      <if test="userEmail != null" >
+        user_email,
+      </if>
+      <if test="userSex != null" >
+        user_sex,
+      </if>
+      <if test="userRegistTime != null" >
+        user_regist_time,
+      </if>
+      <if test="userLogoTime != null" >
+        user_logo_time,
+      </if>
+      <if test="userCount != null" >
+        user_count,
+      </if>
+      <if test="userLogo != null" >
+        user_logo,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+        #{userId,jdbcType=BIGINT},
       </if>
-      <if test="usergroupId != null" >
-        #{usergroupId,jdbcType=INTEGER},
+      <if test="userLevelId != null" >
+        #{userLevelId,jdbcType=INTEGER},
       </if>
-      <if test="userName != null" >
-        #{userName,jdbcType=CHAR},
+      <if test="authorityId != null" >
+        #{authorityId,jdbcType=INTEGER},
+      </if>
+      <if test="userPhonenumber != null" >
+        #{userPhonenumber,jdbcType=CHAR},
+      </if>
+      <if test="userPassworld != null" >
+        #{userPassworld,jdbcType=CHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=CHAR},
+      </if>
+      <if test="userSex != null" >
+        #{userSex,jdbcType=INTEGER},
+      </if>
+      <if test="userRegistTime != null" >
+        #{userRegistTime,jdbcType=CHAR},
+      </if>
+      <if test="userLogoTime != null" >
+        #{userLogoTime,jdbcType=CHAR},
+      </if>
+      <if test="userCount != null" >
+        #{userCount,jdbcType=INTEGER},
+      </if>
+      <if test="userLogo != null" >
+        #{userLogo,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.model.User" >
     update user
     <set >
-      <if test="usergroupId != null" >
-        usergroup_id = #{usergroupId,jdbcType=INTEGER},
+      <if test="userLevelId != null" >
+        user_level_id = #{userLevelId,jdbcType=INTEGER},
       </if>
-      <if test="userName != null" >
-        user_name = #{userName,jdbcType=CHAR},
+      <if test="authorityId != null" >
+        authority_id = #{authorityId,jdbcType=INTEGER},
+      </if>
+      <if test="userPhonenumber != null" >
+        user_phoneNumber = #{userPhonenumber,jdbcType=CHAR},
+      </if>
+      <if test="userPassworld != null" >
+        user_passworld = #{userPassworld,jdbcType=CHAR},
+      </if>
+      <if test="userEmail != null" >
+        user_email = #{userEmail,jdbcType=CHAR},
+      </if>
+      <if test="userSex != null" >
+        user_sex = #{userSex,jdbcType=INTEGER},
+      </if>
+      <if test="userRegistTime != null" >
+        user_regist_time = #{userRegistTime,jdbcType=CHAR},
+      </if>
+      <if test="userLogoTime != null" >
+        user_logo_time = #{userLogoTime,jdbcType=CHAR},
+      </if>
+      <if test="userCount != null" >
+        user_count = #{userCount,jdbcType=INTEGER},
+      </if>
+      <if test="userLogo != null" >
+        user_logo = #{userLogo,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.model.User" >
+    update user
+    set user_level_id = #{userLevelId,jdbcType=INTEGER},
+      authority_id = #{authorityId,jdbcType=INTEGER},
+      user_phoneNumber = #{userPhonenumber,jdbcType=CHAR},
+      user_passworld = #{userPassworld,jdbcType=CHAR},
+      user_email = #{userEmail,jdbcType=CHAR},
+      user_sex = #{userSex,jdbcType=INTEGER},
+      user_regist_time = #{userRegistTime,jdbcType=CHAR},
+      user_logo_time = #{userLogoTime,jdbcType=CHAR},
+      user_count = #{userCount,jdbcType=INTEGER},
+      user_logo = #{userLogo,jdbcType=LONGVARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.model.User" >
     update user
-    set usergroup_id = #{usergroupId,jdbcType=INTEGER},
-      user_name = #{userName,jdbcType=CHAR}
-    where user_id = #{userId,jdbcType=INTEGER}
+    set user_level_id = #{userLevelId,jdbcType=INTEGER},
+      authority_id = #{authorityId,jdbcType=INTEGER},
+      user_phoneNumber = #{userPhonenumber,jdbcType=CHAR},
+      user_passworld = #{userPassworld,jdbcType=CHAR},
+      user_email = #{userEmail,jdbcType=CHAR},
+      user_sex = #{userSex,jdbcType=INTEGER},
+      user_regist_time = #{userRegistTime,jdbcType=CHAR},
+      user_logo_time = #{userLogoTime,jdbcType=CHAR},
+      user_count = #{userCount,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>

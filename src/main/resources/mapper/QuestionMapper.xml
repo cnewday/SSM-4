@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.QuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.model.Question" >
+    <id column="question_id" property="questionId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.model.QuestionWithBLOBs" extends="BaseResultMap" >
+    <result column="question_context" property="questionContext" jdbcType="LONGVARCHAR" />
+    <result column="question_picture" property="questionPicture" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    question_id, user_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    question_context, question_picture
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from question
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from question
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.model.QuestionWithBLOBs" >
+    insert into question (question_id, user_id, question_context, 
+      question_picture)
+    values (#{questionId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{questionContext,jdbcType=LONGVARCHAR}, 
+      #{questionPicture,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.model.QuestionWithBLOBs" >
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="questionContext != null" >
+        question_context,
+      </if>
+      <if test="questionPicture != null" >
+        question_picture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="questionId != null" >
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="questionContext != null" >
+        #{questionContext,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="questionPicture != null" >
+        #{questionPicture,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.QuestionWithBLOBs" >
+    update question
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="questionContext != null" >
+        question_context = #{questionContext,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="questionPicture != null" >
+        question_picture = #{questionPicture,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.model.QuestionWithBLOBs" >
+    update question
+    set user_id = #{userId,jdbcType=BIGINT},
+      question_context = #{questionContext,jdbcType=LONGVARCHAR},
+      question_picture = #{questionPicture,jdbcType=LONGVARCHAR}
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.model.Question" >
+    update question
+    set user_id = #{userId,jdbcType=BIGINT}
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </update>
+</mapper>

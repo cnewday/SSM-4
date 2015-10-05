@@ -3,15 +3,17 @@ package com.mapper;
 import com.model.User;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(Long userId);
 
     int insert(User record);
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer userId);
+    User selectByPrimaryKey(Long userId);
 
     int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKeyWithBLOBs(User record);
 
     int updateByPrimaryKey(User record);
 }

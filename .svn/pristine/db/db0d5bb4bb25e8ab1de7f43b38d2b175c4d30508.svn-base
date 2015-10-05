@@ -1,4 +1,0 @@
-jdbc_driverClassName=com.mysql.jdbc.Driver
-jdbc_url=jdbc:mysql://192.168.31.237:3306/youxuan?useUnicode=true&amp;characterEncoding=utf-8
-jdbc_username=zl
-jdbc_password=12345678
